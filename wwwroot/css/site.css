@@ -21,3 +21,17 @@ body {
   margin-bottom: 60px;
   background-color: lightgray;
 }
+
+h3, .form-label {
+    color: GrayText;
+}
+
+.container{
+    max-width: 700px;
+    margin:auto;
+}
+
+.col-5{
+    margin:auto;
+}
+
