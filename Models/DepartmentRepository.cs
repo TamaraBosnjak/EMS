@@ -10,5 +10,15 @@ namespace EmployeeManagementSystem.Models
         {
             _appDBContext = appDBContext;
         }
+
+        public List<Department> GetDepartments()
+        {
+            return _appDBContext.Departments.ToList();
+        }
+
+        public Department GetDepartmentById(int id)
+        {
+            return _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id)!;
+        }
     }
 }

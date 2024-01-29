@@ -10,5 +10,15 @@ namespace EmployeeManagementSystem.Models
         {
             _appDBContext = appDBContext;
         }
+
+        public JobRole GetJobRoleById(int id) 
+        {
+            return _appDBContext.JobRoles.FirstOrDefault(jr => jr.JobRoleId == id)!;
+        }
+
+        public List<JobRole> GetJobRoles() 
+        {
+            return _appDBContext.JobRoles.ToList();
+        }
     }
 }

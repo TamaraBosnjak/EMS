@@ -10,5 +10,10 @@ namespace EmployeeManagementSystem.Models
         {
             _appDBContext = appDBContext;
         }
+
+        public void CreateUser(User user)
+        {
+
+        }
     }
 }

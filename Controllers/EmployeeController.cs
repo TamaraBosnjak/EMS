@@ -14,10 +14,16 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var employList = _employeeRepository.GetAllEmployees;
+            return View(employList);
         }
 
         public ViewResult List()
+        {
+            return View();
+        }
+
+        public IActionResult CreateEmployee()
         {
             return View();
         }

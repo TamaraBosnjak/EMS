@@ -3,6 +3,6 @@
     public interface IEmployeeRepository
     {
         Employee GetEmployeeById(int id);
-        List<Employee> Employees { get; }
+        List<Employee> GetAllEmployees { get; }
     }
 }

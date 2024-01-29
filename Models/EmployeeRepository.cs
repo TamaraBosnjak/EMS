@@ -15,10 +15,10 @@ namespace EmployeeManagementSystem.Models
 
         public Employee GetEmployeeById(int id)
         {
-            return _appDBContext.Employees.FirstOrDefault(e => e.EmployeeId == id);
+            return _appDBContext.Employees.FirstOrDefault(e => e.EmployeeId == id)!;
         }
         
-        public List<Employee> Employees { get
+        public List<Employee> GetAllEmployees { get
             {
                 return _appDBContext.Employees.ToList();
             }
