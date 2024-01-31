@@ -18,14 +18,22 @@ namespace EmployeeManagementSystem.Controllers
             return View(employList);
         }
 
-        public ViewResult List()
-        {
-            return View();
-        }
-
         public IActionResult CreateEmployee()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateEmployee(Employee employee) 
+        {
+            if(ModelState.IsValid) 
+            {
+                _employeeRepository.CreateEmp(employee);
+                return RedirectToAction("Index");
+            }
+            return View(employee);
+        }
+
+
     }
 }

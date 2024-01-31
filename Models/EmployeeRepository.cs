@@ -23,5 +23,11 @@ namespace EmployeeManagementSystem.Models
                 return _appDBContext.Employees.ToList();
             }
         }
+
+        public void CreateEmp(Employee employee)
+        {
+            _appDBContext.Add(employee);
+            _appDBContext.SaveChanges();
+        }
     }
 }
