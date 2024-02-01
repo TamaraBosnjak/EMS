@@ -29,5 +29,19 @@ namespace EmployeeManagementSystem.Models
             _appDBContext.Add(employee);
             _appDBContext.SaveChanges();
         }
+
+        public void UpdateEmp(int id) 
+        {
+            var updEmp = _appDBContext.Employees.FirstOrDefault(u => u.EmployeeId == id);
+            _appDBContext.Update(updEmp);
+            _appDBContext.SaveChanges();
+        }
+
+        public void DeleteEmp(int id) 
+        {
+            var delEmp = _appDBContext.Employees.FirstOrDefault(d => d.EmployeeId == id);
+            _appDBContext.Remove(delEmp);
+            _appDBContext.SaveChanges();
+        }
     }
 }
