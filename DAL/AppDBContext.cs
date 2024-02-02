@@ -13,5 +13,6 @@ namespace EmployeeManagementSystem.DAL
         public DbSet<Employee> Employees { get; set; }
         public DbSet<JobRole> JobRoles { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

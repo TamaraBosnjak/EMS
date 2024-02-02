@@ -8,11 +8,11 @@ namespace EmployeeManagementSystem.Models
     {
         [BindNever]
         public int EmployeeId { get; set; }
-        [Required(ErrorMessage = "Ime je neispravno")]
+        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Ime je neispravno")]
         [Display(Name = "Ime")]
         [StringLength(20, ErrorMessage = "Ime je predugacko")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "Prezime je neispravno")]
+        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Prezime je neispravno")]
         [Display(Name = "Prezime")]
         [StringLength(20, ErrorMessage = "Prezime je predugacko")]
         public string LastName { get; set; }
@@ -33,15 +33,13 @@ namespace EmployeeManagementSystem.Models
         [DataType(DataType.Date)]
         [Display(Name = "Datum rodjenja")]
         public DateTime? BirthDate { get; set; }
-        //[DisplayFormat(DataFormatString = "{0:d}")]
         [DataType(DataType.Date)]
         [Display(Name = "Datum zaposlenja")]
         public DateTime? EmploymentStartDate { get; set; }
-        //[RegularExpression(@"[0-9]{2}/[0-9]{2}/ [0 - 9]{ 4}", ErrorMessage = "Datum nije validan")]
         [DataType(DataType.Date)]
         [Display(Name = "Datum prestanka radnog odnosa")]
         public DateTime? EmploymentEndDate { get; set; }
-        //public JobRole? JobRole { get; set; }
-        //public Department? Department { get; set; }
+        public JobRole? JobRole { get; set; }
+        //public Department Department { get; set; }
     }
 }

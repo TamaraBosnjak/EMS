@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Models;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -15,12 +16,12 @@ namespace EmployeeManagementSystem.Models
 
         public Employee GetEmployeeById(int id)
         {
-            return _appDBContext.Employees.FirstOrDefault(e => e.EmployeeId == id)!;
+            return _appDBContext.Employees.Include(e => e.JobRole).FirstOrDefault(e => e.EmployeeId == id)!;
         }
         
         public List<Employee> GetAllEmployees { get
             {
-                return _appDBContext.Employees.ToList();
+                return _appDBContext.Employees.Include(e => e.JobRole).ToList();
             }
         }
 

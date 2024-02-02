@@ -7,10 +7,14 @@ namespace EmployeeManagementSystem.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IJobRoleRepository _jobRoleRepository;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository)
         {
             _employeeRepository = employeeRepository;
+            _jobRoleRepository = jobRoleRepository;
+            _departmentRepository = departmentRepository;
         }
 
         public IActionResult Index()
@@ -78,7 +82,7 @@ namespace EmployeeManagementSystem.Controllers
         {
             _employeeRepository.DeleteEmp(id);
 
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
