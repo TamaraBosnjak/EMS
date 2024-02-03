@@ -14,7 +14,8 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var departmentList = _departmentRepository.GetDepartments();
+            return View(departmentList);
         }
     }
 }

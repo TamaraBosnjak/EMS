@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Employee>
 
-<h2 class="display-5 mt-3 mb-4">List of all employees</h2>
+<h2 class="display-5">Lista svih zaposlenih</h2>
 
 <div class="row mb-2">
     <div class="col-2">
-        <a class="btn btn-success" asp-action="CreateEmployee" asp-controller="Employee">Add new employee</a>
+        <a class="btn btn-secondary" asp-action="CreateEmployee" asp-controller="Employee">Dodajte novog zaposlenog</a>
     </div>
 </div>
 <div class="row">
@@ -36,17 +36,15 @@
                             <td>@line.BirthDate</td>
                             <td>@line.EmploymentStartDate</td>
                             <td>@line.EmploymentEndDate</td>
-                            <td>
-                                <a asp-action="EditEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
-                                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect> <path d="M7 42H43" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11 26.7199V34H18.3172L39 13.3081L31.6951 6L11 26.7199Z" fill="#2F88FF" stroke="#000000" stroke-width="4" stroke-linejoin="round"></path> </g></svg>
+                            <td class="d-flex justify-content-between align-content-between">
+                                <a class="btn btn-secondary" asp-action="EditEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
+                                    <i class="bi bi-pencil"></i>
                                 </a>
-                                <a class="btn btn-danger" asp-action="DeleteEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                    </svg>
+                                <a class="btn btn-danger ms-2" asp-action="DeleteEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
+                                    <i class="bi bi-trash"></i>
                                 </a>
                             </td>
+                       
                         </tr>
                     }
                 </tbody>
