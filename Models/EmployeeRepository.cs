@@ -16,14 +16,14 @@ namespace EmployeeManagementSystem.Models
 
         public Employee GetEmployeeById(int id)
         {
-            return _appDBContext.Employees.Include(e => e.Department).ThenInclude(d => d.JobRoles).FirstOrDefault(e => e.EmployeeId == id)!;
+            return _appDBContext.Employees.Include(e => e.Department).FirstOrDefault(e => e.EmployeeId == id)!;
         }
         
-        public List<Employee> GetAllEmployees { get
-            {
-                return _appDBContext.Employees.Include(e => e.Department).ThenInclude(d => d.JobRoles).ToList();
-            }
+        public List<Employee> ListOfAllEmployees()
+        {
+            return _appDBContext.Employees.Include(e => e.Department).ToList();
         }
+
 
         public void CreateEmp(Employee employee)
         {

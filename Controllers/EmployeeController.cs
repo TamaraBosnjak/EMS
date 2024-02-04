@@ -20,8 +20,8 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult Index()
         {
-            var employList = _employeeRepository.GetAllEmployees;
-            return View(employList);
+            var employeeList = _employeeRepository.ListOfAllEmployees();
+            return View(employeeList);
         }
 
         public IActionResult CreateEmployee()

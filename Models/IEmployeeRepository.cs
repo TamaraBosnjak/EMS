@@ -3,7 +3,7 @@
     public interface IEmployeeRepository
     {
         Employee GetEmployeeById(int id);
-        List<Employee> GetAllEmployees { get; }
+        List<Employee> ListOfAllEmployees();
         void CreateEmp(Employee employee);
         void UpdateEmp(int id);
         void DeleteEmp(int id);
