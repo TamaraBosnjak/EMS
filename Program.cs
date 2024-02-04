@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using EmployeeManagementSystem.DAL;
 using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,12 @@ builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IJobRoleRepository, JobRoleRepository>();
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddNotyf(config => 
+    { 
+        config.DurationInSeconds = 3; 
+        config.IsDismissable = true;
+        config.Position = NotyfPosition.BottomRight;
+    });
 builder.Services.AddDbContext<AppDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

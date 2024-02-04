@@ -1,4 +1,5 @@
-﻿using EmployeeManagementSystem.Models;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,17 +11,31 @@ namespace EmployeeManagementSystem.Controllers
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IJobRoleRepository _jobRoleRepository;
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly INotyfService _notyfService;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository, INotyfService notyfService)
         {
             _employeeRepository = employeeRepository;
             _jobRoleRepository = jobRoleRepository;
             _departmentRepository = departmentRepository;
+            _notyfService = notyfService;
         }
 
         public IActionResult Index()
         {
             var employeeList = _employeeRepository.ListOfAllEmployees();
+            return View(employeeList);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string searchString)
+        {
+            var employeeList = _employeeRepository.ListOfAllEmployees();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                employeeList = employeeList.Where(e => e.FirstName.Contains(searchString) || e.LastName.Contains(searchString)).ToList();
+            }
             return View(employeeList);
         }
 
@@ -38,6 +53,8 @@ namespace EmployeeManagementSystem.Controllers
             if(ModelState.IsValid) 
             {
                 _employeeRepository.CreateEmp(employee);
+                _notyfService.Success("Uspešno ste uneli podatke");
+
                 return RedirectToAction("Index");
             }
             return View(employee);
@@ -79,6 +96,7 @@ namespace EmployeeManagementSystem.Controllers
                 employee.EmploymentEndDate = vm.EmploymentEndDate;
 
                 _employeeRepository.UpdateEmp(vm.EmployeeId);
+                _notyfService.Success("Uspešno ste izmenili podatke");
 
                 return RedirectToAction("Index");
             }
@@ -89,6 +107,7 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult DeleteEmployee(int id) 
         {
             _employeeRepository.DeleteEmp(id);
+            _notyfService.Success("Uspešno ste obrisali podatke");
 
             return RedirectToAction("Index");
         }

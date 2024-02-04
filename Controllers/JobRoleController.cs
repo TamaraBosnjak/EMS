@@ -1,4 +1,5 @@
-﻿using EmployeeManagementSystem.Models;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,11 +10,13 @@ namespace EmployeeManagementSystem.Controllers
     {
         private IJobRoleRepository _jobRoleRepository;
         private IDepartmentRepository _departmentRepository;
+        private readonly INotyfService _notyfService;
 
-        public JobRoleController(IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository)
+        public JobRoleController(IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository, INotyfService notyfService)
         {
             _jobRoleRepository = jobRoleRepository;
             _departmentRepository = departmentRepository;
+            _notyfService = notyfService;
         }
 
         public IActionResult Index() 
@@ -37,6 +40,8 @@ namespace EmployeeManagementSystem.Controllers
             if(ModelState.IsValid)
             {
                 _jobRoleRepository.CreateJobRole(jobRole);
+                _notyfService.Success("Uspešno ste uneli podatke");
+
                 return RedirectToAction("Index");
             }
             return RedirectToAction("CreateJobRole");
@@ -66,6 +71,7 @@ namespace EmployeeManagementSystem.Controllers
                 jobRole.Description = vm.Description;
 
                 _jobRoleRepository.UpdateJobRole(vm.JobRoleId);
+                _notyfService.Success("Uspešno ste izmenili podatke");
 
                 return RedirectToAction("Index");
             }
@@ -76,6 +82,8 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult DeleteJobRole(int id) 
         {
             _jobRoleRepository.DeleteJobRole(id);
+            _notyfService.Success("Uspešno ste obrisali podatke");
+
             return RedirectToAction("Index");
         }
     }

@@ -1,12 +1,22 @@
 ﻿@model IEnumerable<Employee>
 
-<h2 class="display-5">Lista svih zaposlenih</h2>
+<div class="row d-flex justify-content-end">
+    <div class="col-md-3">
+        <form class="d-flex" asp-action="Index" asp-controller="Employee">
+            <input name="searchString" class="form-control" type="search" placeholder="Pretraži po imenu.." aria-label="Search" />
+            @* <button class="btn btn-secondary ms-1"><i class="bi bi-search"></i></button> *@
+        </form>
+    </div>
+</div>
 
-<div class="row mb-2">
-    <div class="col-2">
+<h2 class="display-5 mb-2">Lista svih zaposlenih</h2>
+
+<div class="row mb-2 justify-content-between">
+    <div class="col-3">
         <a class="btn btn-secondary" asp-action="CreateEmployee" asp-controller="Employee">Dodajte novog zaposlenog</a>
     </div>
 </div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="table-responsive">

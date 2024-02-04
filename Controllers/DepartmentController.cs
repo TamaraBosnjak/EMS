@@ -1,4 +1,5 @@
-﻿using EmployeeManagementSystem.Models;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,12 @@ namespace EmployeeManagementSystem.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly INotyfService _notyfService;
 
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        public DepartmentController(IDepartmentRepository departmentRepository, INotyfService notyfService)
         {
             _departmentRepository = departmentRepository;
+            _notyfService = notyfService;
         }
 
         public IActionResult Index()
@@ -30,6 +33,8 @@ namespace EmployeeManagementSystem.Controllers
             if(ModelState.IsValid)
             {
                 _departmentRepository.CreateDepart(department);
+                _notyfService.Success("Uspešno ste uneli podatke");
+
                 return RedirectToAction("Index");
             }    
             return View(department);
@@ -59,6 +64,7 @@ namespace EmployeeManagementSystem.Controllers
                 department.Description = vm.Description;
 
                 _departmentRepository.UpdateDepart(vm.DepartmentId);
+                _notyfService.Success("Uspešno ste izmenili podatke");
 
                 return RedirectToAction("Index");
             }
@@ -69,6 +75,8 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult DeleteDepartment(int id) 
         {
             _departmentRepository.DeleteDepart(id);
+            _notyfService.Success("Uspešno ste obrisali podatke");
+
             return RedirectToAction("Index");
         }
     }
