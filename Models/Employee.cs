@@ -39,6 +39,7 @@ namespace EmployeeManagementSystem.Models
         [DataType(DataType.Date)]
         [Display(Name = "Datum prestanka radnog odnosa")]
         public DateTime? EmploymentEndDate { get; set; }
+        public int DepartmentId { get; set; }
         public Department? Department { get; set; } = default!;
     }
 }

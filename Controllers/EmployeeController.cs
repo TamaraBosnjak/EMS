@@ -1,6 +1,7 @@
 ﻿using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EmployeeManagementSystem.Controllers
 {
@@ -25,6 +26,9 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult CreateEmployee()
         {
+            var departments = _departmentRepository.GetDepartments();
+      
+            ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
             return View();
         }
 
@@ -79,9 +83,7 @@ namespace EmployeeManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             //proveriti ovo
-            return View(vm);
-            
-            
+            return View(vm); 
         }
 
         public IActionResult DeleteEmployee(int id) 
@@ -89,6 +91,18 @@ namespace EmployeeManagementSystem.Controllers
             _employeeRepository.DeleteEmp(id);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Details(int id)
+        {
+            if(ModelState.IsValid) 
+            {
+                var employee = _employeeRepository.GetEmployeeById(id);
+                return View(employee);
+            }
+
+            return RedirectToAction("Index");
+          
         }
     }
 }

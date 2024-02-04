@@ -15,12 +15,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
-                        <th>BirthDate</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>Last Name</th>
+                        <th>Department</th>
+                        <th>Job Role</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -29,15 +26,15 @@
                     {
                         <tr>
                             <td>@line.EmployeeId</td>
-                            <td>@line.FirstName @line.LastName</td>
-                            <td>@line.Email</td>
-                            <td>@line.PhoneNumber</td>
-                            <td>@line.Address</td>
-                            <td>@line.BirthDate</td>
-                            <td>@line.EmploymentStartDate</td>
-                            <td>@line.EmploymentEndDate</td>
+                            <td>@line.FirstName</td>
+                            <td>@line.LastName</td>
+                            <td>@line.Department</td>
+                            <td>@line</td>
                             <td class="d-flex justify-content-between align-content-between">
-                                <a class="btn btn-secondary" asp-action="EditEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
+                                <a class="btn btn-secondary" asp-action="Details" asp-controller="Employee" asp-route-id="@line.EmployeeId">
+                                    <i class="bi bi-search"></i>
+                                </a>
+                                <a class="btn btn-warning ms-2" asp-action="EditEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <a class="btn btn-danger ms-2" asp-action="DeleteEmployee" asp-controller="Employee" asp-route-id="@line.EmployeeId">
