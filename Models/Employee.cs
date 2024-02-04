@@ -8,10 +8,12 @@ namespace EmployeeManagementSystem.Models
     {
         [BindNever]
         public int EmployeeId { get; set; }
+        [Required(ErrorMessage = "Ime je neispravno")]
         [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Ime je neispravno")]
         [Display(Name = "Ime")]
         [StringLength(20, ErrorMessage = "Ime je predugacko")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Prezime je neispravno")]
         [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Prezime je neispravno")]
         [Display(Name = "Prezime")]
         [StringLength(20, ErrorMessage = "Prezime je predugacko")]
@@ -26,7 +28,7 @@ namespace EmployeeManagementSystem.Models
         [RegularExpression(@"^(\d{9,10})$", ErrorMessage ="Broj telefona nije validan!")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
-        [Required(ErrorMessage = "Adresa je neispravno")]
+        [Required(ErrorMessage = "Adresa je neispravna")]
         [Display(Name = "Adresa")]
         [StringLength(60, ErrorMessage = "Adresa je predugacka")]
         public string Address { get; set; }

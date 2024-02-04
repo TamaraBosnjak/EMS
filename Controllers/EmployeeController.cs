@@ -82,7 +82,7 @@ namespace EmployeeManagementSystem.Controllers
 
                 return RedirectToAction("Index");
             }
-            //proveriti ovo
+            
             return View(vm); 
         }
 

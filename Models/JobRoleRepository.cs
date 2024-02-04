@@ -20,5 +20,25 @@ namespace EmployeeManagementSystem.Models
         {
             return _appDBContext.JobRoles.ToList();
         }
+
+        public void CreateJobRole(JobRole jobRole)
+        {
+            _appDBContext.Add(jobRole);
+            _appDBContext.SaveChanges();
+        }
+
+        public void UpdateJobRole(int id)
+        {
+            var updJR = _appDBContext.JobRoles.FirstOrDefault(d => d.JobRoleId == id);
+            _appDBContext.Update(updJR);
+            _appDBContext.SaveChanges();
+        }
+
+        public void DeleteJobRole(int id)
+        {
+            var delJR = _appDBContext.JobRoles.FirstOrDefault(d => d.JobRoleId == id);
+            _appDBContext.Remove(delJR);
+            _appDBContext.SaveChanges();
+        }
     }
 }

@@ -20,5 +20,25 @@ namespace EmployeeManagementSystem.Models
         {
             return _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id)!;
         }
+
+        public void CreateDepart(Department department)
+        {
+            _appDBContext.Add(department);
+            _appDBContext.SaveChanges();
+        }
+
+        public void UpdateDepart(int id) 
+        {
+            var updDepart = _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id);
+            _appDBContext.Update(updDepart);
+            _appDBContext.SaveChanges();
+        }
+
+        public void DeleteDepart(int id) 
+        {
+            var delDepart = _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id);
+            _appDBContext.Remove(delDepart);
+            _appDBContext.SaveChanges();
+        }
     }
 }

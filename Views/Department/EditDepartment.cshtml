@@ -1,0 +1,28 @@
+﻿@using EmployeeManagementSystem.ViewModels;
+@model EditDepartmentViewModel
+
+<form asp-controller="Department" asp-action="EditDepartment" method="post" role="form">
+    <h3 class="mt-5 mb-5">
+        Izmenite podatke sektora
+    </h3>
+    @Html.HiddenFor(m => m.DepartmentId)
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-4">
+        <div class="row g-2">
+            <div class="col-12">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mt-3">
+                <input type="submit" class="btn btn-secondary" value="Izmeni podatke" />
+            </div>
+        </div>
+    </div>
+</form>
