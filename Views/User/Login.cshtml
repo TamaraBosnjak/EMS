@@ -1,6 +1,7 @@
-﻿@model User
+﻿@using EmployeeManagementSystem.ViewModels;
+@model UserLoginViewModel
 
-<form asp-controller="User" asp-action="Login role="form">
+<form asp-controller="User" asp-action="Login" method="post" role="form">
     <h3 class="mt-4">
         Molimo Vas unesite podatke za logovanje
     </h3>

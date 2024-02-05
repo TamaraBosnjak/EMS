@@ -18,6 +18,11 @@ namespace EmployeeManagementSystem.Models
         {
             return _appDBContext.Employees.Include(e => e.Department).FirstOrDefault(e => e.EmployeeId == id)!;
         }
+
+        public Employee GetEmployeeByEmail(string email) 
+        {
+            return _appDBContext.Employees.FirstOrDefault(e => e.Email == email)!;
+        }
         
         public List<Employee> ListOfAllEmployees()
         {

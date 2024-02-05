@@ -12,6 +12,7 @@ builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IJobRoleRepository, JobRoleRepository>();
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddNotyf(config => 
     { 
         config.DurationInSeconds = 3; 

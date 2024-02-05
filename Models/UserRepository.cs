@@ -1,4 +1,6 @@
 ﻿using EmployeeManagementSystem.DAL;
+using EmployeeManagementSystem.Helpers;
+using EmployeeManagementSystem.ViewModels;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -13,7 +15,15 @@ namespace EmployeeManagementSystem.Models
 
         public void CreateUser(User user)
         {
+            user.Password = EncryptionHelper.Encrypt(user.Password);
 
+            _appDBContext.Users.Add(user);
+            _appDBContext.SaveChanges();
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _appDBContext.Users.FirstOrDefault(u => u.Email == email)!;
         }
     }
 }
