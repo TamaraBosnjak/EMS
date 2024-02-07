@@ -13,6 +13,7 @@ namespace EmployeeManagementSystem.Models
         [ForeignKey("Department")]
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-        
+        //public IEnumerable<Employee>? ListOfEmployees { get; set; } = default;
+
     }
 }

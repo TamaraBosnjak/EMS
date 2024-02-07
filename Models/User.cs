@@ -6,8 +6,8 @@ namespace EmployeeManagementSystem.Models
 {
     public class User
     {
-        [Key]
-        public int UserID { get; set; }
+        [BindNever]
+        public int UserId { get; set; }
         //[Required(ErrorMessage = "UserName je neispravan")]
         //[Display(Name = "Korisnicko ime")]
         //[StringLength(20, ErrorMessage = "UserName je predugacak")]
@@ -17,9 +17,11 @@ namespace EmployeeManagementSystem.Models
         [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,15}$", ErrorMessage = "Password mora da sadrzi najmanje po jedno veliko i malo slovo, broj i specijalan karakter i da bude duzine 8-15 karaktera")]
         public string Password { get; set; }
         
-        [Required(ErrorMessage = "Password je obavezan!")]
+        //[Required(ErrorMessage = "Password je obavezan!")]
         [Display(Name = "Ponovi lozinku")]
-        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,15}$", ErrorMessage = "Password mora da sadrzi najmanje po jedno veliko i malo slovo, broj i specijalan karakter i da bude duzine 8-15 karaktera")]
+        //[RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,15}$", ErrorMessage = "Password mora da sadrzi najmanje po jedno veliko i malo slovo, broj i specijalan karakter i da bude duzine 8-15 karaktera")]
+        [NotMapped]
+        [Compare("Password")]
         public string? ConfirmPassword { get; set; }
         //[Required(ErrorMessage = "Ime je neispravno")]
         //[Display(Name = "Ime")]
@@ -41,11 +43,13 @@ namespace EmployeeManagementSystem.Models
         //[Display(Name = "Drzava")]
         //[StringLength(50, ErrorMessage = "Ime drzave je predugacko")]
         //public string Country { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; }
         //[Required(ErrorMessage = "Broj telefona je obavezan!")]
         //[Display(Name = "Broj telefona")]
         //[RegularExpression(@"^(\d{9,10})$", ErrorMessage = "Broj telefona nije validan!")]
         //[DataType(DataType.PhoneNumber)]
         //public string PhoneNumber { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
     }
 }

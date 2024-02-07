@@ -5,7 +5,8 @@
     <h3 class="mt-4">
         Molimo Vas unesite podatke za registraciju
     </h3>
-    @Html.HiddenFor(m => m.UserID)
+    @Html.HiddenFor(m => m.UserId)
+    @* @Html.HiddenFor(m => m.Employee.EmployeeId) *@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="col-5">
         <div class="row mt-4">

@@ -29,14 +29,14 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userRepository.GetUserByEmail(registerUser.Email);
                 var employeeUser = _employeeRepository.GetEmployeeByEmail(registerUser.Email);
+                var employeeId = _employeeRepository.GetEmployeeById(employeeUser.EmployeeId);
 
                 if (employeeUser != null)
                 {
-                    if (user == null)
+                    if (registerUser != null)
                     {
-                        _userRepository.CreateUser(registerUser);
+                        _userRepository.CreateUser(registerUser, employeeId.EmployeeId);
                         _notyf.Success("Registracija uspešna!");
 
                         //ovo izmeniti
@@ -100,6 +100,17 @@ namespace EmployeeManagementSystem.Controllers
 
             return View("Login");
 
+        }
+
+        public IActionResult Logout() 
+        {
+            if (Request.Cookies["User"] != null)
+            {
+                Response.Cookies.Delete("User");
+            }
+
+            _notyf.Success("Uspešno ste se izlogovali!");
+            return RedirectToAction("Index", "Home");
         }
 
     }

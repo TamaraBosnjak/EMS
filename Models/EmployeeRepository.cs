@@ -26,7 +26,7 @@ namespace EmployeeManagementSystem.Models
         
         public List<Employee> ListOfAllEmployees()
         {
-            return _appDBContext.Employees.Include(e => e.Department).ToList();
+            return _appDBContext.Employees.Include(e => e.JobRole).ThenInclude(jr => jr.Department).ToList();
         }
 
 

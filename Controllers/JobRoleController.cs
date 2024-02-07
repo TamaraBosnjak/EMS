@@ -37,14 +37,24 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult CreateJobRole(JobRole jobRole) 
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _jobRoleRepository.CreateJobRole(jobRole);
-                _notyfService.Success("Uspešno ste uneli podatke");
+                var jobRoleDB = _jobRoleRepository.GetJobRoleById(jobRole.JobRoleId);
 
-                return RedirectToAction("Index");
+                if (jobRoleDB == null)
+                {
+                    _jobRoleRepository.CreateJobRole(jobRole);
+                    _notyfService.Success("Uspešno ste uneli podatke");
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Poslovna pozicija vec postoji.");
+                    return View(jobRole);
+                }
             }
-            return RedirectToAction("CreateJobRole");
+            return RedirectToAction("CreateJobRole", jobRole);
         }
 
         public IActionResult EditJobRole(int id)

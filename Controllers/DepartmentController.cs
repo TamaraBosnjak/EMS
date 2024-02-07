@@ -32,10 +32,20 @@ namespace EmployeeManagementSystem.Controllers
         {
             if(ModelState.IsValid)
             {
-                _departmentRepository.CreateDepart(department);
-                _notyfService.Success("Uspešno ste uneli podatke");
+                var departmentDB = _departmentRepository.GetDepartmentByName(department.Name);
 
-                return RedirectToAction("Index");
+                if (departmentDB == null)
+                {
+                    _departmentRepository.CreateDepart(department);
+                    _notyfService.Success("Uspešno ste uneli podatke");
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Sektor vec postoji.");
+                    return View(department);
+                }
             }    
             return View(department);
         }

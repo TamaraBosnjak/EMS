@@ -44,5 +44,8 @@ namespace EmployeeManagementSystem.Models
         public int DepartmentId { get; set; }
         public Department? Department { get; set; } = default!;
 
+        public int JobRoleId { get; set; }
+        public JobRole? JobRole { get; set; }
+
     }
 }

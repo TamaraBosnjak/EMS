@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.DAL;
+using EmployeeManagementSystem.ViewModels;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -19,6 +20,11 @@ namespace EmployeeManagementSystem.Models
         public Department GetDepartmentById(int id)
         {
             return _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id)!;
+        }
+
+        public Department GetDepartmentByName(string name)
+        {
+            return _appDBContext.Departments.FirstOrDefault(d => d.Name == name)!;
         }
 
         public void CreateDepart(Department department)

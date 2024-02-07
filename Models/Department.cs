@@ -10,8 +10,9 @@ namespace EmployeeManagementSystem.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Opis je obavezan")]
         public string Description { get; set; }
-        public IEnumerable<Employee>? ListOfEmployees { get; set; }
-        public IEnumerable<JobRole>? ListOfJobRoles { get; set; }
+        public IEnumerable<Employee>? ListOfEmployees { get; set; } = default;
+        public IEnumerable<JobRole>? ListOfJobRoles { get; set; } = default;
+
     }
 
 }

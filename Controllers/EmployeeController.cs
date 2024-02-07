@@ -42,20 +42,33 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult CreateEmployee()
         {
             var departments = _departmentRepository.GetDepartments();
+            var jobRoles = _jobRoleRepository.GetJobRoles();
       
             ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+            ViewBag.JobRoles = new SelectList(jobRoles, "JobRoleId", "Title");
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateEmployee(Employee employee) 
         {
+
             if(ModelState.IsValid) 
             {
-                _employeeRepository.CreateEmp(employee);
-                _notyfService.Success("Uspešno ste uneli podatke");
+                var employeeDB = _employeeRepository.GetEmployeeByEmail(employee.Email);
+                if (employeeDB == null)
+                {
+                    _employeeRepository.CreateEmp(employee);
+                    _notyfService.Success("Uspešno ste uneli podatke");
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Korisnik sa unetom email adresom je vec registrovan.");
+                    return View(employee);
+                }
+                
             }
             return View(employee);
         }

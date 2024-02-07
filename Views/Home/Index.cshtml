@@ -1,10 +1,33 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-2 mt-5">Dobrodosli u EMS</h1>
-    <br />
-    <h2 class="display-3 mt-2 pb-4">Molim Vas prijavite se kako biste koristili aplikaciju</h2>
-    <br />
-</div>
+@{
+    var user = new User();
+    var userCookie = HttpContextAccessor.HttpContext!.Request.Cookies["User"];
+    if (userCookie != null)
+    {
+        user = JsonConvert.DeserializeObject<User>(userCookie!);
+    }
+}
+
+@if (!string.IsNullOrEmpty(user!.Email))
+{
+    <div class="text-center">
+        <h1 class="display-2 mt-5">Dobrodosli @user.Email</h1>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-2 mt-5">Dobrodosli u EMS</h1>
+        <br />
+        <h2 class="display-3 mt-2 pb-4">Molim Vas prijavite se kako biste koristili aplikaciju</h2>
+        <br />
+    </div>
+}
+
