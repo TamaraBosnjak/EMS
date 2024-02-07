@@ -4,6 +4,7 @@ using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EmployeeManagementSystem.Controllers
 {
@@ -112,6 +113,7 @@ namespace EmployeeManagementSystem.Controllers
             _notyf.Success("Uspešno ste se izlogovali!");
             return RedirectToAction("Index", "Home");
         }
+
 
     }
 }

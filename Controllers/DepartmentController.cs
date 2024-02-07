@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace EmployeeManagementSystem.Controllers
 {
@@ -9,18 +10,33 @@ namespace EmployeeManagementSystem.Controllers
     {
         private readonly IDepartmentRepository _departmentRepository;
         private readonly INotyfService _notyfService;
+        private readonly IUserRepository _userRepository;
 
-        public DepartmentController(IDepartmentRepository departmentRepository, INotyfService notyfService)
+        public DepartmentController(IDepartmentRepository departmentRepository, INotyfService notyfService, IUserRepository userRepository)
         {
             _departmentRepository = departmentRepository;
             _notyfService = notyfService;
+            _userRepository = userRepository;
         }
 
         public IActionResult Index()
         {
-            var departmentList = _departmentRepository.GetDepartments();
-            return View(departmentList);
-        }
+            var userCookie = Request.Cookies["User"];
+
+            if (userCookie == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var user = JsonConvert.DeserializeObject<User>(userCookie!);
+
+            if (user != null)
+            {
+                var departmentList = _departmentRepository.GetDepartments();
+                return View(departmentList);
+            }
+            return RedirectToAction("Login", "User");
+        }   
 
         public IActionResult CreateDepartment()
         {

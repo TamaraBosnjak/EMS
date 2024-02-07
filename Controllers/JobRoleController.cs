@@ -3,26 +3,43 @@ using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace EmployeeManagementSystem.Controllers
 {
     public class JobRoleController : Controller
     {
-        private IJobRoleRepository _jobRoleRepository;
-        private IDepartmentRepository _departmentRepository;
+        private readonly IJobRoleRepository _jobRoleRepository;
+        private readonly IDepartmentRepository _departmentRepository;
         private readonly INotyfService _notyfService;
+        private readonly IUserRepository _userRepository;
 
-        public JobRoleController(IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository, INotyfService notyfService)
+        public JobRoleController(IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository, INotyfService notyfService, IUserRepository userRepository)
         {
             _jobRoleRepository = jobRoleRepository;
             _departmentRepository = departmentRepository;
             _notyfService = notyfService;
+            _userRepository = userRepository;
         }
 
         public IActionResult Index() 
         {
-            var jobRoleList = _jobRoleRepository.GetJobRoles();
-            return View(jobRoleList);
+            var userCookie = Request.Cookies["User"];
+
+            if (userCookie == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var user = JsonConvert.DeserializeObject<User>(userCookie!);
+
+            if (user != null)
+            {
+                var jobRoleList = _jobRoleRepository.GetJobRoles();
+                return View(jobRoleList);
+            }
+
+            return RedirectToAction("Login", "User");
         }
 
         public IActionResult CreateJobRole()
