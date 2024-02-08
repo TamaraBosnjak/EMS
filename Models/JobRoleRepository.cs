@@ -16,6 +16,7 @@ namespace EmployeeManagementSystem.Models
         {
             return _appDBContext.JobRoles.FirstOrDefault(jr => jr.JobRoleId == id)!;
         }
+
         public JobRole GetJobRoleByName(string name)
         {
             return _appDBContext.JobRoles.FirstOrDefault(d => d.Title == name)!;

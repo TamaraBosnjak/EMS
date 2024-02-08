@@ -29,7 +29,6 @@ namespace EmployeeManagementSystem.Models
             return _appDBContext.Employees.Include(e => e.JobRole).ThenInclude(jr => jr.Department).ToList();
         }
 
-
         public void CreateEmp(Employee employee)
         {
             _appDBContext.Add(employee);

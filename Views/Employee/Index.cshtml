@@ -4,12 +4,15 @@
     <div class="col-md-3">
         <form class="d-flex" asp-action="Index" asp-controller="Employee">
             <input name="searchString" class="form-control" type="search" placeholder="Pretraži po imenu.." aria-label="Search" />
-            @* <button class="btn btn-secondary ms-1"><i class="bi bi-search"></i></button> *@
+            <button class="btn btn-secondary ms-1"><i class="bi bi-search"></i></button>
         </form>
+    </div>
+    <div class="col-md-3">
+        <a asp-action="Index" class="text-dark mt-4">Vratite se na početnu listu</a>
     </div>
 </div>
 
-<h2 class="display-5 mb-2">Lista svih zaposlenih</h2>
+<h2 class="display-5 mb-2 mt-4">Lista svih zaposlenih</h2>
 
 <div class="row mb-2 justify-content-between">
     <div class="col-3">
@@ -51,7 +54,6 @@
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
-                       
                         </tr>
                     }
                 </tbody>

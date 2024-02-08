@@ -71,6 +71,7 @@ namespace EmployeeManagementSystem.Controllers
                     return View(jobRole);
                 }
             }
+
             return RedirectToAction();
         }
 

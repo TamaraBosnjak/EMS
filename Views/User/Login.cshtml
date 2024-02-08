@@ -2,11 +2,13 @@
 @model UserLoginViewModel
 
 <form asp-controller="User" asp-action="Login" method="post" role="form">
+
     <h3 class="mt-4">
         Molimo Vas unesite podatke za logovanje
     </h3>
   
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="col-5">
         <div class="row mt-4">
             <div class="col-12">

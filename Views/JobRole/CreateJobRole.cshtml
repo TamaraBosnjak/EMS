@@ -2,9 +2,11 @@
 @model JobRole
 
 <form asp-controller="JobRole" asp-action="CreateJobRole" method="post" role="form">
+
     <h3 class="mt-5 mb-5">
         Unesite podatke o novoj poslovnoj poziciji
     </h3>
+
     @Html.HiddenFor(m => m.JobRoleId)
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

@@ -8,8 +8,11 @@ namespace EmployeeManagementSystem.Models
     {
         [BindNever]
         public int DepartmentId { get; set; }
+
         [Required(ErrorMessage = "Naziv sektora je neispravan")]
+        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Naziv sektora je neispravan")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Opis je obavezan")]
         public string Description { get; set; }
     }

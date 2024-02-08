@@ -6,12 +6,16 @@ namespace EmployeeManagementSystem.Models
 {
     public class JobRole
     {
-        //[BindNever]
+        [BindNever]
         public int? JobRoleId { get; set; }
+
         [Required(ErrorMessage = "Naziv poslovne pozicije je neispravan")]
+        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Naziv poslovne pozicije je neispravan")]
         public string Title { get; set; }
+
         [Required(ErrorMessage = "Opis je obavezan")]
         public string Description { get; set; }
+
         [ForeignKey("Department")]
         public int DepartmentId { get; set; }
         public Department? Department { get; set; }

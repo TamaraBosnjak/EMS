@@ -69,7 +69,6 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult CreateEmployee(Employee employee) 
         {
-
             if(ModelState.IsValid) 
             {
                 var employeeDB = _employeeRepository.GetEmployeeByEmail(employee.Email);
@@ -151,7 +150,6 @@ namespace EmployeeManagementSystem.Controllers
             }
 
             return RedirectToAction("Index");
-          
         }
     }
 }

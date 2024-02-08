@@ -113,7 +113,5 @@ namespace EmployeeManagementSystem.Controllers
             _notyf.Success("Uspešno ste se izlogovali!");
             return RedirectToAction("Index", "Home");
         }
-
-
     }
 }

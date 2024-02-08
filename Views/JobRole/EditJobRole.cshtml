@@ -2,9 +2,11 @@
 @model EditJobRoleViewModel
 
 <form asp-controller="JobRole" asp-action="EditJobRole" method="post" role="form">
+
     <h3 class="mt-5 mb-5">
         Izmenite podatke o novoj poslovnoj poziciji
     </h3>
+
     @Html.HiddenFor(m => m.JobRoleId)
     @Html.HiddenFor(m => m.DepartmentId)
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
