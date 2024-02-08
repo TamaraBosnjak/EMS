@@ -62,7 +62,8 @@ namespace EmployeeManagementSystem.Controllers
                     ModelState.AddModelError("", "Sektor vec postoji.");
                     return View(department);
                 }
-            }    
+            }
+            ModelState.AddModelError("", "Nedovoljan unos podataka. Obratite se IT podrsci.");
             return View(department);
         }
 

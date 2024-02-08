@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.DAL;
+using EmployeeManagementSystem.ViewModels;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -11,9 +12,13 @@ namespace EmployeeManagementSystem.Models
             _appDBContext = appDBContext;
         }
 
-        public JobRole GetJobRoleById(int id) 
+        public JobRole GetJobRoleById(int? id) 
         {
             return _appDBContext.JobRoles.FirstOrDefault(jr => jr.JobRoleId == id)!;
+        }
+        public JobRole GetJobRoleByName(string name)
+        {
+            return _appDBContext.JobRoles.FirstOrDefault(d => d.Title == name)!;
         }
 
         public List<JobRole> GetJobRoles()
@@ -27,7 +32,7 @@ namespace EmployeeManagementSystem.Models
             _appDBContext.SaveChanges();
         }
 
-        public void UpdateJobRole(int id)
+        public void UpdateJobRole(int? id)
         {
             var updJR = _appDBContext.JobRoles.FirstOrDefault(d => d.JobRoleId == id);
             _appDBContext.Update(updJR);

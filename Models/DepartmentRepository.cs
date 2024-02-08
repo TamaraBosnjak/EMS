@@ -17,7 +17,7 @@ namespace EmployeeManagementSystem.Models
             return _appDBContext.Departments.ToList();
         }
 
-        public Department GetDepartmentById(int id)
+        public Department GetDepartmentById(int? id)
         {
             return _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id)!;
         }
@@ -33,7 +33,7 @@ namespace EmployeeManagementSystem.Models
             _appDBContext.SaveChanges();
         }
 
-        public void UpdateDepart(int id) 
+        public void UpdateDepart(int? id) 
         {
             var updDepart = _appDBContext.Departments.FirstOrDefault(d => d.DepartmentId == id);
             _appDBContext.Update(updDepart);

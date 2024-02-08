@@ -56,7 +56,7 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var jobRoleDB = _jobRoleRepository.GetJobRoleById(jobRole.JobRoleId);
+                var jobRoleDB = _jobRoleRepository.GetJobRoleByName(jobRole.Title);
 
                 if (jobRoleDB == null)
                 {
@@ -71,7 +71,7 @@ namespace EmployeeManagementSystem.Controllers
                     return View(jobRole);
                 }
             }
-            return RedirectToAction("CreateJobRole", jobRole);
+            return RedirectToAction();
         }
 
         public IActionResult EditJobRole(int id)
