@@ -19,6 +19,8 @@ namespace EmployeeManagementSystem.Models
         [Compare("Password")]
         public string? ConfirmPassword { get; set; }
 
+        [Required(ErrorMessage = "Email je obavezan!")]
+        [Display(Name = "Email adresa")]
         public string Email { get; set; }
         public int? EmployeeId { get; set; }
         public Employee? Employee { get; set; }

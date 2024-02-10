@@ -26,36 +26,46 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
+        [TypeFilter(typeof(CustomExceptionFilter))]
         public IActionResult Register(User registerUser)
         {
             if (ModelState.IsValid)
             {
-                var employeeUser = _employeeRepository.GetEmployeeByEmail(registerUser.Email);
-                var employeeId = _employeeRepository.GetEmployeeById(employeeUser.EmployeeId);
-
-                if (employeeUser != null)
+                try 
                 {
-                    if (registerUser != null)
-                    {
-                        _userRepository.CreateUser(registerUser, employeeId.EmployeeId);
-                        _notyf.Success("Registracija uspešna!");
+                    var registeredUser = _userRepository.GetUserByEmail(registerUser.Email);    
+                    var employeeUser = _employeeRepository.GetEmployeeByEmail(registerUser.Email);
+                    var employeeId = _employeeRepository.GetEmployeeById(employeeUser.EmployeeId);
 
-                        //ovo izmeniti
-                        return RedirectToAction("Index", "Home");
+                    if (employeeUser != null)
+                    {
+                        if (registerUser != null && registeredUser == null)
+                        {
+                            _userRepository.CreateUser(registerUser, employeeId.EmployeeId);
+                            _notyf.Success("Registracija uspešna!");
+
+                            //ovo izmeniti
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Korisnik sa email adresom " + registerUser.Email + " vec postoji.");
+                            //proveriti ovo
+                            return View("Index");
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Korisnik sa email adresom " + registerUser.Email + "vec postoji.");
+                        ModelState.AddModelError("", "Unet email se ne nalazi u bazi podataka zaposlenih.");
                         //proveriti ovo
                         return View("Index");
                     }
                 }
-                else
+                catch
                 {
-                    ModelState.AddModelError("", "Unet email se ne nalazi u bazi podataka zaposlenih.");
-                    //proveriti ovo
-                    return View("Index");
+                    throw new Exception($"Unet email {registerUser.Email} se ne nalazi u bazi podataka");
                 }
+               
             }
             else
             {

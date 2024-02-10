@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using EmployeeManagementSystem.Helpers;
 using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace EmployeeManagementSystem.Controllers
             _userRepository = userRepository;
         }
 
+        [TypeFilter(typeof(CustomExceptionFilter))]
         public IActionResult Index()
         { 
             var userCookie = Request.Cookies["User"];
@@ -35,12 +37,19 @@ namespace EmployeeManagementSystem.Controllers
 
             var user = JsonConvert.DeserializeObject<User>(userCookie!);
 
-            if (user != null)
+            try
             {
-                var employeeList = _employeeRepository.ListOfAllEmployees();
-                return View(employeeList);
+                if (user != null)
+                {
+                    var employeeList = _employeeRepository.ListOfAllEmployees();
+                    return View(employeeList);
+                }
             }
-
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
+           
             return RedirectToAction("Login", "User");
         }
 
@@ -66,12 +75,14 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
+        [TypeFilter(typeof(CustomExceptionFilter))]
         [HttpPost]
         public IActionResult CreateEmployee(Employee employee) 
         {
             if(ModelState.IsValid) 
             {
                 var employeeDB = _employeeRepository.GetEmployeeByEmail(employee.Email);
+                //throw new Exception("Greska");
                 if (employeeDB == null)
                 {
                     _employeeRepository.CreateEmp(employee);

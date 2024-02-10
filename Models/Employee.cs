@@ -38,10 +38,12 @@ namespace EmployeeManagementSystem.Models
         [StringLength(60, ErrorMessage = "Adresa je predugacka")]
         public string Address { get; set; }
 
+        [Required(ErrorMessage = "Datum rodjenja nije neispravan")]
         [DataType(DataType.Date)]
         [Display(Name = "Datum rodjenja")]
         public DateTime? BirthDate { get; set; }
 
+        [Required(ErrorMessage = "Datum zaposlenja nije neispravan")]
         [DataType(DataType.Date)]
         [Display(Name = "Datum zaposlenja")]
         public DateTime? EmploymentStartDate { get; set; }

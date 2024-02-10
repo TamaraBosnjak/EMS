@@ -1,3 +1,9 @@
-﻿<div>
-    Doslo je do greske!
+﻿<div">
+    <h2>Doslo je do greske!</h2>
+
+    @{
+        var p = (Exception)ViewData["Exception object"];
+    }
+
+    <p>@p.Message</p>
 </div>

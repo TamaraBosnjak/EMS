@@ -3,12 +3,16 @@ using EmployeeManagementSystem.Models;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using EmployeeManagementSystem.Helpers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementSystem.Models
 {
     public class EmployeeRepository : IEmployeeRepository
     {
         private AppDBContext _appDBContext;
+
         public EmployeeRepository(AppDBContext appDBContext)
         {
             _appDBContext = appDBContext;
@@ -23,10 +27,19 @@ namespace EmployeeManagementSystem.Models
         {
             return _appDBContext.Employees.FirstOrDefault(e => e.Email == email)!;
         }
-        
+
+        [TypeFilter(typeof(CustomExceptionFilter))]
         public List<Employee> ListOfAllEmployees()
         {
-            return _appDBContext.Employees.Include(e => e.JobRole).ThenInclude(jr => jr.Department).ToList();
+            try
+            {
+                //throw new Exception("Desila se greska pri otvaranju liste zaposlenih");
+                return _appDBContext.Employees.Include(e => e.JobRole).ThenInclude(jr => jr.Department).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void CreateEmp(Employee employee)

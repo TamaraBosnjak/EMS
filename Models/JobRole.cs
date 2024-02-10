@@ -10,10 +10,12 @@ namespace EmployeeManagementSystem.Models
         public int? JobRoleId { get; set; }
 
         [Required(ErrorMessage = "Naziv poslovne pozicije je neispravan")]
+        [Display(Name = "Poslovna pozicija")]
         [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Naziv poslovne pozicije je neispravan")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Opis je obavezan")]
+        [Display(Name = "Opis")]
         public string Description { get; set; }
 
         [ForeignKey("Department")]
