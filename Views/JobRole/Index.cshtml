@@ -17,6 +17,7 @@
                         <th>ID</th>
                         <th>Naziv pozicije</th>
                         <th>Opis</th>
+                        <th>Sektor</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                             <td>@line.JobRoleId</td>
                             <td>@line.Title</td>
                             <td>@line.Description</td>
+                            <td>@line.Department.Name</td>
                             <td class="d-flex align-content-between">
                                 <a class="btn btn-warning ms-2" asp-action="EditJobRole" asp-controller="JobRole" asp-route-id="@line.JobRoleId">
                                     <i class="bi bi-pencil"></i>

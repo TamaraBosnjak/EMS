@@ -50,6 +50,16 @@
                 <input asp-for="EmploymentEndDate" class="form-control" />
                 <span asp-validation-for="EmploymentEndDate" class="text-danger"></span>
             </div>
+            <div class="col-12 mt-3">
+                <label class="form-label">Odaberite sektor</label>
+                <select asp-for="DepartmentId" asp-items="ViewBag.Departments"></select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="col-12 mt-3">
+                <label class="form-label">Odaberite poziciju</label>
+                <select asp-for="JobRoleId" asp-items="ViewBag.JobRoles"></select>
+                <span asp-validation-for="JobRoleId" class="text-danger"></span>
+            </div>
             <div class="col-12">
                 <input type="submit" class="btn btn-secondary btn-sm mb-1" value="Izmeni podatke" />
                 <a asp-action="Index" class="btn btn-outline-secondary btn-sm mb-1">Vrati se nazad</a>

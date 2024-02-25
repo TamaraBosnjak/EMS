@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.DAL;
 using EmployeeManagementSystem.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -14,7 +15,7 @@ namespace EmployeeManagementSystem.Models
 
         public JobRole GetJobRoleById(int? id) 
         {
-            return _appDBContext.JobRoles.FirstOrDefault(jr => jr.JobRoleId == id)!;
+            return _appDBContext.JobRoles.Include(d => d.Department).FirstOrDefault(jr => jr.JobRoleId == id)!;
         }
 
         public JobRole GetJobRoleByName(string name)
@@ -24,7 +25,7 @@ namespace EmployeeManagementSystem.Models
 
         public List<JobRole> GetJobRoles()
         {
-            return _appDBContext.JobRoles.ToList();
+            return _appDBContext.JobRoles.Include(d => d.Department).ToList();
         }
 
         public void CreateJobRole(JobRole jobRole)

@@ -11,7 +11,6 @@ namespace EmployeeManagementSystem.Models
 
         [Required(ErrorMessage = "Naziv sektora je neispravan")]
         [Display(Name = "Sektor")]
-        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Naziv sektora je neispravan")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Opis je obavezan")]

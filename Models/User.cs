@@ -13,16 +13,15 @@ namespace EmployeeManagementSystem.Models
         [Display(Name = "Lozinka")]
         [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,15}$", ErrorMessage = "Password mora da sadrzi najmanje po jedno veliko i malo slovo, broj i specijalan karakter i da bude duzine 8-15 karaktera")]
         public string Password { get; set; }
-   
-        [Display(Name = "Ponovi lozinku")]
         [NotMapped]
-        [Compare("Password")]
-        public string? ConfirmPassword { get; set; }
+        [Display(Name = "Potvrdi lozinku")]
+        public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Email je obavezan!")]
         [Display(Name = "Email adresa")]
         public string Email { get; set; }
         public int? EmployeeId { get; set; }
+       
         public Employee? Employee { get; set; }
     }
 }

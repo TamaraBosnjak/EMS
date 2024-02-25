@@ -28,7 +28,7 @@ h3, .form-label {
 
 .container{
     max-width: 1000px;
-    margin:auto;
+    margin-top: 20px;
 }
 
 .col-4, .col-5{

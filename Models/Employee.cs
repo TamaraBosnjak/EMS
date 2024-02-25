@@ -10,13 +10,11 @@ namespace EmployeeManagementSystem.Models
         public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Ime je neispravno")]
-        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Ime je neispravno")]
         [Display(Name = "Ime")]
         [StringLength(20, ErrorMessage = "Ime je predugacko")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Prezime je neispravno")]
-        [RegularExpression("^([a-zA-Z]{3,})", ErrorMessage = "Prezime je neispravno")]
         [Display(Name = "Prezime")]
         [StringLength(20, ErrorMessage = "Prezime je predugacko")]
         public string LastName { get; set; }
