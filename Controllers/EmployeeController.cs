@@ -95,13 +95,18 @@ namespace EmployeeManagementSystem.Controllers
                     ModelState.AddModelError("", "Korisnik sa unetom email adresom je vec registrovan.");
                     return View(employee);
                 }
-                
             }
             return View(employee);
         }
 
         public IActionResult EditEmployee(int id)
         {
+            var departments = _departmentRepository.GetDepartments();
+            var jobRoles = _jobRoleRepository.GetJobRoles();
+
+            ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+            ViewBag.JobRoles = new SelectList(jobRoles, "JobRoleId", "Title");
+
             var employee = _employeeRepository.GetEmployeeById(id);
 
             var vm = new EditEmployeeViewModel()
@@ -114,7 +119,9 @@ namespace EmployeeManagementSystem.Controllers
                 PhoneNumber = employee.PhoneNumber,
                 BirthDate = employee.BirthDate,
                 EmploymentStartDate = employee.EmploymentStartDate,
-                EmploymentEndDate = employee.EmploymentEndDate
+                EmploymentEndDate = employee.EmploymentEndDate,
+                DepartmentId = employee.DepartmentId,
+                JobRoleId = employee.JobRoleId
             };
 
             return View(vm);
@@ -134,6 +141,8 @@ namespace EmployeeManagementSystem.Controllers
                 employee.BirthDate = vm.BirthDate;
                 employee.EmploymentStartDate = vm.EmploymentStartDate;
                 employee.EmploymentEndDate = vm.EmploymentEndDate;
+                employee.DepartmentId = vm.DepartmentId;
+                employee.JobRoleId = vm.JobRoleId;
 
                 _employeeRepository.UpdateEmp(vm.EmployeeId);
                 _notyfService.Success("Uspešno ste izmenili podatke");
