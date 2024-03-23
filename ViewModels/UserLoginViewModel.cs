@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EmployeeManagementSystem.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EmployeeManagementSystem.ViewModels
@@ -12,5 +13,8 @@ namespace EmployeeManagementSystem.ViewModels
         [Display(Name = "Lozinka")]
         [Required(ErrorMessage = "Lozinka je obavezna")]
         public string Password { get; set; }
+
+        //public Employee Employee { get; set; }
+        public int? EmployeeId { get; set; }
     }
 }

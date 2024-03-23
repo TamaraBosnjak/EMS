@@ -65,7 +65,6 @@ namespace EmployeeManagementSystem.Controllers
                 {
                     throw new Exception($"Unet email {registerUser.Email} se ne nalazi u bazi podataka");
                 }
-               
             }
             else
             {

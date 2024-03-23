@@ -54,6 +54,10 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult CreateJobRole(JobRole jobRole) 
         {
+            var departments = _departmentRepository.GetDepartments();
+
+            ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+
             if (ModelState.IsValid)
             {
                 var jobRoleDB = _jobRoleRepository.GetJobRoleByName(jobRole.Title);
@@ -77,13 +81,18 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult EditJobRole(int id)
         {
+            var departments = _departmentRepository.GetDepartments();
+
+            ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+
             var jobRole = _jobRoleRepository.GetJobRoleById(id);
 
             var vm = new EditJobRoleViewModel()
             {
                 JobRoleId = jobRole.JobRoleId,
                 Title = jobRole.Title,
-                Description = jobRole.Description
+                Description = jobRole.Description,
+                DepartmentId = jobRole.DepartmentId
             };
 
             return View(vm);
@@ -97,6 +106,7 @@ namespace EmployeeManagementSystem.Controllers
                 var jobRole = _jobRoleRepository.GetJobRoleById(vm.JobRoleId);
                 jobRole.Title = vm.Title;
                 jobRole.Description = vm.Description;
+                jobRole.DepartmentId = vm.DepartmentId;
 
                 _jobRoleRepository.UpdateJobRole(vm.JobRoleId);
                 _notyfService.Success("Uspešno ste izmenili podatke");
