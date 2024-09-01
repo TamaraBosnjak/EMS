@@ -55,5 +55,6 @@ namespace EmployeeManagementSystem.Models
 
         public int JobRoleId { get; set; }
         public JobRole? JobRole { get; set; }
+      
     }
 }

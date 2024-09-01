@@ -28,9 +28,5 @@ namespace EmployeeManagementSystem.Models
             return _appDBContext.Users.Include(u => u.Employee).FirstOrDefault(u => u.Email == email)!;
         }
 
-        public User GetUserByEmployeeId(int id)
-        {
-            return _appDBContext.Users.Include(u => u.Employee).FirstOrDefault(u => u.Employee.EmployeeId == id)!;
-        }
     }
 }

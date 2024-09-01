@@ -1,6 +1,7 @@
 using AspNetCoreHero.ToastNotification;
 using EmployeeManagementSystem.DAL;
 using EmployeeManagementSystem.Helpers;
+using EmployeeManagementSystem.Middleware;
 using EmployeeManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ app.UseExceptionHandler("/Home/ErrorPage");
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseMiddleware<Middleware>();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

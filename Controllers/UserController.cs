@@ -114,7 +114,7 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult Logout() 
         {
-            if (Request.Cookies["User"] != null)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
                 Response.Cookies.Delete("User");
             }
