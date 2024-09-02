@@ -13,7 +13,6 @@ namespace EmployeeManagementSystem.ViewModels
         [Display(Name = "Lozinka")]
         [Required(ErrorMessage = "Lozinka je obavezna")]
         public string Password { get; set; }
-      
         public int EmployeeId { get; set; }
     }
 }

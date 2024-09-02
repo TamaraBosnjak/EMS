@@ -54,9 +54,11 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult CreateJobRole(JobRole jobRole) 
         {
-            var departments = _departmentRepository.GetDepartments();
+            //var departments = _departmentRepository.GetDepartments();
+            var departments = _departmentRepository.GetDepartmentById(jobRole.DepartmentId);
 
-            ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+            //ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+            ViewBag.Departments = departments;
 
             if (ModelState.IsValid)
             {
@@ -82,6 +84,7 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult EditJobRole(int id)
         {
             var departments = _departmentRepository.GetDepartments();
+
 
             ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
 

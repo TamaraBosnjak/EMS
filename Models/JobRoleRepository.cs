@@ -28,6 +28,11 @@ namespace EmployeeManagementSystem.Models
             return _appDBContext.JobRoles.Include(d => d.Department).ToList();
         }
 
+        public List<JobRole> GetJobRoles(int id)
+        {
+            return _appDBContext.JobRoles.Include(d => d.Department).Where(jr => jr.DepartmentId == id).ToList();
+        }
+
         public void CreateJobRole(JobRole jobRole)
         {
             _appDBContext.Add(jobRole);

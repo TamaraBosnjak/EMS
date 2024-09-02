@@ -31,39 +31,28 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                try 
+                try
                 {
                     var registeredUser = _userRepository.GetUserByEmail(registerUser.Email);    
                     var employeeUser = _employeeRepository.GetEmployeeByEmail(registerUser.Email);
-                    var employeeId = _employeeRepository.GetEmployeeById(employeeUser.EmployeeId);
+                    var employeeId = employeeUser.EmployeeId;
 
-                    if (employeeUser != null)
+                    if (registerUser != null && registeredUser == null)
                     {
-                        if (registerUser != null && registeredUser == null)
-                        {
-                            _userRepository.CreateUser(registerUser, employeeId.EmployeeId);
-                            _notyf.Success("Registracija uspešna!");
+                        _userRepository.CreateUser(registerUser, employeeId);
+                        _notyf.Success("Registracija uspešna!");
 
-                            //ovo izmeniti
-                            return RedirectToAction("Index", "Home");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Korisnik sa email adresom " + registerUser.Email + " vec postoji.");
-                            //proveriti ovo
-                            return View("Index");
-                        }
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Unet email se ne nalazi u bazi podataka zaposlenih.");
-                        //proveriti ovo
+                        ModelState.AddModelError("", "Korisnik sa email adresom " + registerUser.Email + " vec postoji.");
                         return View("Index");
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    throw new Exception($"Unet email {registerUser.Email} se ne nalazi u bazi podataka");
+                    return Content($"Unet email {registerUser.Email} se ne nalazi u bazi podataka");
                 }
             }
             else
@@ -109,7 +98,6 @@ namespace EmployeeManagementSystem.Controllers
             _notyf.Error("Neispravni kredencijali!");
 
             return View("Login");
-
         }
 
         public IActionResult Logout() 
