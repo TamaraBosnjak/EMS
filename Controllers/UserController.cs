@@ -14,6 +14,7 @@ namespace EmployeeManagementSystem.Controllers
         private readonly INotyfService _notyf;
         private readonly IEmployeeRepository _employeeRepository;
 
+
         public UserController(IUserRepository userRepository, INotyfService notyf, IEmployeeRepository employeeRepository)
         {
             _userRepository = userRepository;
@@ -31,28 +32,20 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var registeredUser = _userRepository.GetUserByEmail(registerUser.Email);    
+                var employeeUser = _employeeRepository.GetEmployeeByEmail(registerUser.Email);
+
+                if (registerUser != null && registeredUser == null)
                 {
-                    var registeredUser = _userRepository.GetUserByEmail(registerUser.Email);    
-                    var employeeUser = _employeeRepository.GetEmployeeByEmail(registerUser.Email);
-                    var employeeId = employeeUser.EmployeeId;
+                    _userRepository.CreateUser(registerUser, employeeUser.EmployeeId);
+                    _notyf.Success("Registracija uspešna!");
 
-                    if (registerUser != null && registeredUser == null)
-                    {
-                        _userRepository.CreateUser(registerUser, employeeId);
-                        _notyf.Success("Registracija uspešna!");
-
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Korisnik sa email adresom " + registerUser.Email + " vec postoji.");
-                        return View("Index");
-                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                catch (Exception ex)
+                else
                 {
-                    return Content($"Unet email {registerUser.Email} se ne nalazi u bazi podataka");
+                    ModelState.AddModelError("", "Korisnik sa email adresom " + registerUser.Email + " vec postoji.");
+                    return View("Index");
                 }
             }
             else

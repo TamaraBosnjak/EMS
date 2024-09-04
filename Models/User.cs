@@ -24,9 +24,10 @@ namespace EmployeeManagementSystem.Models
         [Required(ErrorMessage = "Email je obavezan!")]
         [Display(Name = "Email adresa")]
         public string Email { get; set; }
-       
+
         public int EmployeeId { get; set; }
-       
+
+        [Required(ErrorMessage = "Morate biti zaposleni da bi mogli da se registrujete!")]
         public Employee Employee { get; set; }
     }
 }

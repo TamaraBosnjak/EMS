@@ -10,13 +10,11 @@ namespace EmployeeManagementSystem.Controllers
     {
         private readonly IDepartmentRepository _departmentRepository;
         private readonly INotyfService _notyfService;
-        private readonly IUserRepository _userRepository;
 
-        public DepartmentController(IDepartmentRepository departmentRepository, INotyfService notyfService, IUserRepository userRepository)
+        public DepartmentController(IDepartmentRepository departmentRepository, INotyfService notyfService)
         {
             _departmentRepository = departmentRepository;
             _notyfService = notyfService;
-            _userRepository = userRepository;
         }
 
         public IActionResult Index()
