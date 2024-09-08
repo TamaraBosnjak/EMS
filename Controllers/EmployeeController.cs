@@ -37,17 +37,10 @@ namespace EmployeeManagementSystem.Controllers
 
             var user = JsonConvert.DeserializeObject<User>(userCookie!);
 
-            try
+            if (user != null)
             {
-                if (user != null)
-                {
-                    var employeeList = _employeeRepository.ListOfAllEmployees();
-                    return View(employeeList);
-                }
-            }
-            catch (Exception ex) 
-            {
-                throw new Exception(ex.Message);
+                var employeeList = _employeeRepository.ListOfAllEmployees();
+                return View(employeeList);
             }
            
             return RedirectToAction("Login", "User");
@@ -68,8 +61,8 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult CreateEmployee()
         {
             var departments = _departmentRepository.GetDepartments();
-            var jobRoles = _jobRoleRepository.GetJobRoles();
-      
+            var jobRoles = new List<JobRole>();
+
             ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
             ViewBag.JobRoles = new SelectList(jobRoles, "JobRoleId", "Title");
             return View();
@@ -79,10 +72,9 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult CreateEmployee(Employee employee) 
         {
-            if(ModelState.IsValid) 
+            if (ModelState.IsValid) 
             {
                 var employeeDB = _employeeRepository.GetEmployeeByEmail(employee.Email);
-                //throw new Exception("Greska");
                 if (employeeDB == null)
                 {
                     _employeeRepository.CreateEmp(employee);
@@ -171,5 +163,11 @@ namespace EmployeeManagementSystem.Controllers
 
             return RedirectToAction("Index");
         }
-    }
+
+        public JsonResult GetJobRoleByDepartmentId(int departmentId)
+        {
+            return Json (_jobRoleRepository.GetJobRoles(departmentId));
+        }
+
+    } 
 }

@@ -31,15 +31,7 @@ namespace EmployeeManagementSystem.Models
         [TypeFilter(typeof(CustomExceptionFilter))]
         public List<Employee> ListOfAllEmployees()
         {
-            try
-            {
-                //throw new Exception("Desila se greska pri otvaranju liste zaposlenih");
-                return _appDBContext.Employees.Include(e => e.JobRole).ThenInclude(jr => jr.Department).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+             return _appDBContext.Employees.Include(e => e.JobRole).ThenInclude(jr => jr.Department).ToList();
         }
 
         public void CreateEmp(Employee employee)
