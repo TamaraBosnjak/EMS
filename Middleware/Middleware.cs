@@ -25,8 +25,11 @@ namespace EmployeeManagementSystem.Middleware
                 var user = new LoggedInUser();
                 user.Name = loggedInUser.Employee.FirstName;
                 user.IsAuthenticated = true;
-                string[]? roles = { "" };
+                //user.DepartmentName = loggedInUser.Employee.Department.Name;
 
+                string[]? roles = { "Admin", "User" };
+                
+                
                 var currentUser = new GenericPrincipal(user, roles);
 
                 _context!.HttpContext!.User = currentUser;
