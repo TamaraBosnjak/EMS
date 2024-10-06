@@ -1,12 +1,11 @@
-﻿@using EmployeeManagementSystem.ViewModels;
-@model User
+﻿@model User
 
 <form asp-controller="User" asp-action="Register" method="post" role="form">
 
     <h3 class="mt-4">
         Molimo Vas unesite podatke za registraciju
     </h3>
-    @Html.HiddenFor(m => m.EmployeeId)
+    @* @Html.HiddenFor(m => m.EmployeeId) *@
 
     <div asp-validation-summary="All" class="text-danger"></div>
 

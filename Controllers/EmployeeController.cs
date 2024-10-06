@@ -53,7 +53,7 @@ namespace EmployeeManagementSystem.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                employeeList = employeeList.Where(e => e.FirstName.ToLower().Contains(searchString) || e.LastName.ToLower().Contains(searchString)).ToList();
+                employeeList = employeeList.Where(e => e.FirstName.ToLower().Contains(searchString.ToLower()) || e.LastName.ToLower().Contains(searchString.ToLower())).ToList();
             }
             return View(employeeList);
         }

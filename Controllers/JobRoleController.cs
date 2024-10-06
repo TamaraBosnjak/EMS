@@ -12,14 +12,12 @@ namespace EmployeeManagementSystem.Controllers
         private readonly IJobRoleRepository _jobRoleRepository;
         private readonly IDepartmentRepository _departmentRepository;
         private readonly INotyfService _notyfService;
-        private readonly IUserRepository _userRepository;
 
-        public JobRoleController(IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository, INotyfService notyfService, IUserRepository userRepository)
+        public JobRoleController(IJobRoleRepository jobRoleRepository, IDepartmentRepository departmentRepository, INotyfService notyfService)
         {
             _jobRoleRepository = jobRoleRepository;
             _departmentRepository = departmentRepository;
             _notyfService = notyfService;
-            _userRepository = userRepository;
         }
 
         public IActionResult Index() 
@@ -54,10 +52,8 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult CreateJobRole(JobRole jobRole) 
         {
-            //var departments = _departmentRepository.GetDepartments();
             var departments = _departmentRepository.GetDepartmentById(jobRole.DepartmentId);
 
-            //ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
             ViewBag.Departments = departments;
 
             if (ModelState.IsValid)
